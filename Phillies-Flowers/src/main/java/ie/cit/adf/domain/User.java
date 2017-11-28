@@ -2,14 +2,40 @@ package ie.cit.adf.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user")
 public class User {
-	private String name;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID", nullable=false)
 	private int UID;
-	private String address;
+	
+	@Column(name="USERNAME", nullable=false)
 	private String username;
+	
+	@Column(name="USERPASSWORD", nullable=false)
 	private String password;
+	
+	private String name;
+	private String address;
 	private String tel;
+	
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
 	private List<Package> cart;
+	
+	//@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	//private List<Payment> payments;
 
 	public User() {
 	}

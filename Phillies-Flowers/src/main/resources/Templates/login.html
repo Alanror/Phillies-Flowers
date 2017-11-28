@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{label.login}"></title>
+<!--Add link later-->
+</head>
+<body> // 
+	<div class="wrapper">
+		<form th:action="@{/login}" th:object="${Login}" method="POST">
+			<table>
+				<thead>
+					<tr>
+						<td colspan="2" class="title">
+							<label for="Login" th:text="#{label.login}"></label> 
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="error">
+							<label th:text="${errorMessage}"></label>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label for="Username: " th:text="#{label.username} "></label></td>
+						<td>
+							<input type="text" th:field="*{userName}"/> 
+						</td>
+					</tr>
+					<tr>
+						<td><label for="Password: " th:text="#{label.password} "></label></td>
+						<td>
+							<input type="password" th:field="*{password}"/> 
+						</td>
+					</tr>
+					<tr align="center">
+						<td style="padding-top:10px; padding-bottom:10px" colspan="2">
+							<button type="submit" name="action" value="Login" style="width:100%"><span th:text="#{label.login}"></span></button> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
