@@ -20,6 +20,13 @@ public class ApplicationController {
 	
 	private User activeUser = new User();
 	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String toLogin(Map<String, Object> model) {
+		
+		model.put("loginDetails", new Login());
+		return "/login";
+	}
+	
 	@RequestMapping(value="/login", method=RequestMethod.POST, params="action=Login")
 	public String authenticateLoginDetails(
 			@RequestParam(value="action", required=true) String action,
@@ -33,7 +40,7 @@ public class ApplicationController {
 		User user = userRepository.findByLoginCredentials(username, password);
 		
 		if(user != null) {
-			directory = "/user_home";
+			directory = "/home";
 			model.put("user", user);
 			activeUser = user;
 		}

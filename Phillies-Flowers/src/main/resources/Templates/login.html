@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title th:text="#{label.login}"></title>
-<!--Add link later-->
+<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"/>
 </head>
-<body> // 
+<body> 
 	<div class="wrapper">
 		<form th:action="@{/login}" th:object="${Login}" method="POST">
 			<table>
@@ -24,13 +24,13 @@
 					<tr>
 						<td><label for="Username: " th:text="#{label.username} "></label></td>
 						<td>
-							<input type="text" th:field="*{userName}"/> 
+							<input type="text" /><!--th:field="*{UserName}"-->
 						</td>
 					</tr>
 					<tr>
 						<td><label for="Password: " th:text="#{label.password} "></label></td>
 						<td>
-							<input type="password" th:field="*{password}"/> 
+							<input type="password"/> <!--  th:field="*{password}"/> -->
 						</td>
 					</tr>
 					<tr align="center">
