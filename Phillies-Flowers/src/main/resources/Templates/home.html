@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<!-- Add link to css -->
+<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"/>
 <head>
 <title th:text="#{label.homePage}"></title>
 </head>
@@ -9,8 +9,9 @@
 		<form th:action="@{/home}" method="GET">
 			<table>
 				<tr>
-					<!-- Add content here -->
-					Hello
+					<td style="padding:8px;"><button type="submit" name="action" value="Custom Order"><span th:text="#{label.customOrder}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="My Orders"><span th:text="#{label.viewOrders}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="All Packages"><span th:text="#{label.allPackages}"></span></button></td>
 				</tr>
 			</table>
 		</form>

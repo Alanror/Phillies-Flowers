@@ -1,5 +1,6 @@
 package ie.cit.adf.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,83 +16,62 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID", nullable=false)
-	private int UID;
+	private int id;
 	
 	@Column(name="USERNAME", nullable=false)
-	private String username;
+	private String userName;
 	
 	@Column(name="USERPASSWORD", nullable=false)
 	private String password;
 	
-	private String name;
-	private String address;
-	private String tel;
-	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
-	private List<Package> cart;
+	private List<Package> packages;
 	
-	//@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	//private List<Payment> payments;
-
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Payment> payments;
+	
 	public User() {
+		this.packages = new ArrayList<>();
+		this.payments = new ArrayList<>();
 	}
-	public User(String name, int uID, String address, String username, String password, String tel,
-			List<Package> cart) {
-		super();
-		this.name = name;
-		UID = uID;
-		this.address = address;
-		this.username = username;
-		this.password = password;
-		this.tel = tel;
-		this.cart = cart;
+
+	public int getId() {
+		return id;
 	}
-	public String getName() {
-		return name;
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public int getUID() {
-		return UID;
-	}
-	public void setUID(int uID) {
-		UID = uID;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getTele() {
-		return tel;
+
+	public List<Package> getPackages() {
+		return packages;
 	}
-	public void setTele(String tel) {
-		this.tel = tel;
-	}
-	public List<Package> getCart() {
-		return cart;
-	}
-	public void setCart(List<Package> cart) {
-		this.cart = cart;
+
+	public void setPackages(List<Package> packages) {
+		this.packages = packages;
 	}
 	
-	
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
 }

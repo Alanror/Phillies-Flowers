@@ -1,5 +1,6 @@
 package ie.cit.adf.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,79 +12,80 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+//import org.apache.tomcat.util.codec.binary.Base64;
+
+
 @Entity
 @Table(name="package")
 public class Package {
-	
-	@Column(name="PACKAGENAME", nullable=false)
-	private String name; 
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID", nullable=false)
-	private int UID;
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name="USERID")
 	private User user;
 	
-	@Column(name="PACKAGEAMOUNT", nullable=false)
-	private int price;
-	private String category;
+	@Column(name="PACKAGENAME", nullable=false)
+	private String packageName;
 	
 	@Column(name="DESCRIPTION", nullable=true)
 	private String description;
 	
+	@Column(name="PACKAGEAMOUNT", nullable=false)
+	private int packageAmount;
+	
+	/*@OneToMany(mappedBy="package", fetch=FetchType.EAGER)
+	private List<Payment> payments;*/
+		
+	
 	public Package() {
+		//this.payments = new ArrayList<>();
 	}
-	public Package(String name, int uID, int price, String category, List<AddonItem> addons) {
-		super();
-		this.name = name;
-		UID = uID;
-		this.price = price;
-		this.category = category;
+
+	public int getId() {
+		return id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getUID() {
-		return UID;
-	}
-	public void setUID(int uID) {
-		UID = uID;
-	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public float getPrice() {
-		return price;
+
+	public String getPackageName() {
+		return packageName;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
 	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
-	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@Override
-	public String toString() {
-		return "Package [name=" + name + ", UID=" + UID + ", price=" + price + ", category=" + category + " ]";
+
+	public int getPackageAmount() {
+		return packageAmount;
 	}
-	
-	
+
+	public void setPackageAmount(int amount) {
+		this.packageAmount = amount;
+	}
+
+	/*public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}*/
 }

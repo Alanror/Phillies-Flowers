@@ -10,8 +10,9 @@ import ie.cit.adf.domain.User;
 @Repository
 public interface IUserRepository extends CrudRepository<User, Integer>{
 	
-	@Query("SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
+	@Query("SELECT u FROM User u WHERE u.userName = :userName AND u.password = :password")
 	User findByLoginCredentials(
-			@Param("username") String username, 
+			@Param("userName") String userName, 
 			@Param("password") String password);
+	
 }

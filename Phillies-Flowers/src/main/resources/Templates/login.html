@@ -4,9 +4,9 @@
 <title th:text="#{label.login}"></title>
 <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"/>
 </head>
-<body> 
+<body style="font-family:sans-serif; background:#f4f4f4;">
 	<div class="wrapper">
-		<form th:action="@{/login}" th:object="${Login}" method="POST">
+		<form th:action="@{/login}" th:object="${login}" method="POST">
 			<table>
 				<thead>
 					<tr>
@@ -24,17 +24,17 @@
 					<tr>
 						<td><label for="Username: " th:text="#{label.username} "></label></td>
 						<td>
-							<input type="text" /><!--th:field="*{UserName}"-->
+							<input type="text" th:field="*{userName}"/> 
 						</td>
 					</tr>
 					<tr>
 						<td><label for="Password: " th:text="#{label.password} "></label></td>
 						<td>
-							<input type="password"/> <!--  th:field="*{password}"/> -->
+							<input type="password" th:field="*{password}"/> 
 						</td>
 					</tr>
 					<tr align="center">
-						<td style="padding-top:10px; padding-bottom:10px" colspan="2">
+						<td style="padding-top:8px; padding-bottom:8px" colspan="2">
 							<button type="submit" name="action" value="Login" style="width:100%"><span th:text="#{label.login}"></span></button> 
 						</td>
 					</tr>

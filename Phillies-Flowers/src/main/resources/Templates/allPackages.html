@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{label.allPackages}"></title>
+<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"/>
+</head>
+<body>
+	<div class="wrapper">
+		<table style="width:100%;">
+			<thead>
+				<tr>
+					<td colspan="2" class="title">
+						<label for="All Packages" th:text="#{label.allPackages}"></label>
+					</td>
+				</tr>
+			</thead>
+		</table>
+		<form th:each="package : ${packages}" th:action="@{/allPackages}" method="GET">
+			<table style="width:100%;">
+				<tbody>		
+					<tr>
+						<td>
+							<table style="width:100%;">
+								<tr>
+									<td class="top_border" style="width:90%; padding:8px;">
+										<table style="width:100%;">
+											<tr>
+												<td colspan="2">
+													<input type="hidden" th:name="id" th:value="${package.id}"/>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Title" th:text="#{label.packageName}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<label th:text="${package.packageName}"></label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Description" th:text="#{label.packageDescription}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label th:text="${package.description}"></label></td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Amount" th:text="#{label.packageAmount}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<label th:text="&euro; + ${package.packageAmount}"></label>
+												</td>
+											</tr> 
+											<tr>
+												<td colspan="2" align="right" style="padding-top:8px; padding-bottom:8px;">
+													<button type="submit" name="action" value="Make Payment"><span th:text="#{label.packagePayment}"></span></button>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<form th:action="@{/allPackages}" method="GET">
+			<table style="width:100%;">
+				<tr align="center" class="top_border" style="padding-top:8px;">
+					<td><button type="submit" name="action" value="Return to Home Page"><span th:text="#{label.returnHome}"></span></button></td>
+				</tr>
+				<tr>
+								<td colspan="2" class="subtitle">
+									<label th:text="${paymentMessage}"></label>
+								</td>
+							</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

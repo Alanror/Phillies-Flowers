@@ -2,21 +2,21 @@ package ie.cit.adf.domain;
 
 public class Login {
 	
-	private String userName;
+	private String username;
 	private String password;
 	
 	public Login(){}
 	
-	public Login(String userName, String passWord) {
-		this.userName = userName;
-		this.password = passWord;
+	public Login(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 	
 	public String getUserName() {
-		return userName;
+		return username;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;

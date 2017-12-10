@@ -1,5 +1,9 @@
 package ie.cit.adf.repository;
 
-public interface IPaymentRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-}
+import ie.cit.adf.domain.Payment;
+
+@Repository
+public interface IPaymentRepository extends CrudRepository<Payment, Integer> {}
