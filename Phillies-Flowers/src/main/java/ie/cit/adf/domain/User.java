@@ -73,5 +73,6 @@ public class User {
 
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
-	}
+	}		
 }
+
