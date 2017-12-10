@@ -4,15 +4,17 @@ public class Flower {
 
     private Long id;
     private String name;
-    private int population;
+    private float price;
+    private int stock;
 
     public Flower() {
     }
 
-    public Flower(Long id, String name, int population) {
+    public Flower(Long id, String name, float price, int stock) {
         this.id = id;
         this.name = name;
-        this.population = population;
+        this.price = price;
+        this.stock = stock;
     }
 
     public Long getId() {
@@ -31,17 +33,26 @@ public class Flower {
         this.name = name;
     }
 
-    public int getPopulation() {
-        return population;
+    public float getPrice() {
+        return price;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "City{" + "id=" + id + ", name=" + name + 
-                ", population=" + population + '}';
-    }
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	@Override
+	public String toString() {
+		return "Flower [id=" + id + ", name=" + name + ", price=" + price + ", stock=" + stock + "]";
+	}
+    
+    
 }

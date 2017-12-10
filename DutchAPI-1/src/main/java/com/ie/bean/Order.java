@@ -3,7 +3,7 @@ package com.ie.bean;
 public class Order {
 
 	private int id;
-	private String name;
+	private String shopname;
 	private float total;
 	private float outstanding;
 	
@@ -11,10 +11,10 @@ public class Order {
 		super();
 	}
 
-	public Order(int id, String name, float total, float outstanding) {
+	public Order(int id, String shopname, float total, float outstanding) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.shopname = shopname;
 		this.total = total;
 		this.outstanding = outstanding;
 	}
@@ -27,12 +27,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getShopName() {
+		return shopname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setShopName(String shopname) {
+		this.shopname = shopname;
 	}
 
 	public float getTotal() {
@@ -53,7 +53,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", name=" + name + ", total=" + total + ", outstanding=" + outstanding + "]";
+		return "Order [id=" + id + ", shopname=" + shopname + ", total=" + total + ", outstanding=" + outstanding + "]";
 	}
 	
 	
