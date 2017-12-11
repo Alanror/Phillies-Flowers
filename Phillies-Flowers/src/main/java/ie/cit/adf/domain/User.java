@@ -28,14 +28,10 @@ public class User {
 	@Column(name="USERPASSWORD", nullable=false)
 	private String password;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
-	private List<Package> packages;
-	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Payment> payments;
 	
 	public User() {
-		this.packages = new ArrayList<>();
 		this.payments = new ArrayList<>();
 	}
 
@@ -57,14 +53,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public List<Package> getPackages() {
-		return packages;
-	}
-
-	public void setPackages(List<Package> packages) {
-		this.packages = packages;
 	}
 	
 	public List<Payment> getPayments() {

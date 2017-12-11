@@ -7,7 +7,6 @@ CREATE TABLE user (
 
 CREATE TABLE package (
 	ID 			INT NOT NULL AUTO_INCREMENT,
-	UserID			INT NOT NULL,
 	PackageName		NVARCHAR(300) NOT NULL,
 	Description     	NVARCHAR(300),
 	PackageAmount		INT NOT NULL,

@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Table(name="payment")
 public class Payment {
 	
+	public Payment() {
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID", nullable=false)
@@ -29,6 +31,8 @@ public class Payment {
 	
 	@Column(name="PAYMENTAMOUNT", nullable=false)
 	private int paymentAmount;
+
+	
 
 	public int getId() {
 		return id;

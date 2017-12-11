@@ -24,10 +24,6 @@ public class Package {
 	@Column(name="ID", nullable=false)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name="USERID")
-	private User user;
-	
 	@Column(name="PACKAGENAME", nullable=false)
 	private String packageName;
 	
@@ -47,14 +43,6 @@ public class Package {
 
 	public int getId() {
 		return id;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getPackageName() {

@@ -1,5 +1,6 @@
 package ie.cit.adf.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
@@ -73,24 +74,21 @@ public class ApplicationController {
 		entityManager.clear();
 		loggedInUser = userRepository.findOne(loggedInUser.getId());
 		
-		model.put("packages", loggedInUser.getPackages());
+
+		
+		model.put("packages", paymentRepository.findAll());
 		return "/myOrders";
 	}
 	
 	
-	@RequestMapping(value="/myOrders", method=RequestMethod.GET, params="action=Remove Package")
+	@RequestMapping(value="/myOrders", method=RequestMethod.GET, params="action=Remove Order")
 	public String removePackage(
 			@RequestParam(value="action", required=true) String action,
 			@RequestParam("id") int id,
 			Map<String, Object> model) {
+		paymentRepository.delete(id);
 		
-		packageRepository.delete(id);
-		
-		entityManager.clear();
-		loggedInUser = userRepository.findOne(loggedInUser.getId());
-		model.put("packages", loggedInUser.getPackages());
-		
-		return "/myOrders";
+		return "/home";
 	}
 	
 	@RequestMapping(value="/myOrders", method=RequestMethod.GET, params="action=Return to Home Page")
@@ -121,23 +119,20 @@ public class ApplicationController {
 			@RequestParam(value="action", required=true) String action,
 			@RequestParam("id") int packageId,
 			Map<String, Object> model) {
-				
-	
+
 		Package package_ = packageRepository.findOne(packageId);
-		
 		Payment payment = new Payment();
-		
-		payment.setPaymentAmount(package_.getPackageAmount());
 		
 		payment.setUser(loggedInUser);
 		payment.setPackage(package_);
+		payment.setPaymentAmount(package_.getPackageAmount());
+		
 		paymentRepository.save(payment);
 		packageRepository.save(package_);
 		
 		entityManager.clear();
-		loggedInUser = userRepository.findOne(loggedInUser.getId());
-		model.put("packages", loggedInUser.getPackages());
-		model.put("paymentMessage", "Package has been added to orders");
+		model.put("paymentMessage", "Package has been added to orders and it will cost €" + payment.getPackage().getPackageAmount());
+		
 		return "/allPackages";
 	}
 }

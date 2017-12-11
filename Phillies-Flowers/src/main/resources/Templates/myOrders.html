@@ -15,7 +15,7 @@
 				</tr>
 			</thead>
 		</table>
-		<form th:each="package : ${packages}" th:action="@{/myOrders}" method="GET">	
+		<form th:each="payment : ${packages}" th:action="@{/myOrders}" method="GET">	
 			<table style="width:100%">
 				<tbody>		
 					<tr>
@@ -26,7 +26,7 @@
 										<table style="width:100%;">
 											<tr>
 												<td colspan="2">
-													<input type="hidden" th:name="id" th:value="${package.id}"/>
+													<input type="hidden" th:name="id" th:value="${payment.getId()}"/>
 												</td>
 											</tr>
 											<tr>
@@ -34,7 +34,7 @@
 											</tr>
 											<tr>
 												<td colspan="2">
-													<label th:text="${package.packageName}"></label>
+													<label th:text="${payment.getPackage().packageName}"></label>
 												</td>
 											</tr>
 											<tr>
@@ -42,8 +42,8 @@
 											</tr>
 											<tr>
 												<td colspan="2">
-													<label th:text="${package.description}"></label>
-													<input type="hidden" th:name="description" th:value="${package.description}"/>
+													<label th:text="${payment.getPackage().description}"></label>
+													<input type="hidden" th:name="description" th:value="${payment.getPackage().description}"/>
 												</td>
 											</tr>
 											<tr>
@@ -51,7 +51,7 @@
 											</tr>
 											<tr>
 												<td colspan="2">
-													<label th:text="&euro; + ${package.packageAmount}"></label>
+													<label th:text="&euro; + ${payment.getPackage().packageAmount}"></label>
 												</td>
 											</tr> 
 											<tr>
