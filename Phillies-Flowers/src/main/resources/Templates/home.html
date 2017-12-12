@@ -12,9 +12,18 @@
 					<td style="padding:8px;"><button type="submit" name="action" value="Custom Order"><span th:text="#{label.customOrder}"></span></button></td>
 					<td style="padding:8px;"><button type="submit" name="action" value="My Orders"><span th:text="#{label.viewOrders}"></span></button></td>
 					<td style="padding:8px;"><button type="submit" name="action" value="All Packages"><span th:text="#{label.allPackages}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="Admin Panel"><span th:text="#{label.adminPanel}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="Logout"><span th:text="#{label.logout}"></span></button></td>
+					
+				</tr>
+				<tr>
+					<td colspan="2" class="subtitle">
+					<label th:text="${adminMessage}"></label>
+					</td>
 				</tr>
 			</table>
 		</form>
+				
 	</div>
 </body>
 </html>

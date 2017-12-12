@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"/>
+<head>
+<title th:text="#{label.adminPage}"></title>
+</head>
+<body>
+	<div class="wrapper">
+		<form th:action="@{/home}" method="GET">
+			<table>
+				<tr>
+					<td style="padding:8px;"><button type="submit" name="action" value="All Flowers"><span th:text="#{label.allFlowers}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="My Dutch Orders"><span th:text="#{label.viewMyOrders}"></span></button></td>
+					<td style="padding:8px;"><button type="submit" name="action" value="Home"><span th:text="#{label.home}"></span></button></td>
+				</tr>
+			</table>
+			</form>
+			<form th:each="flower : ${flowers}" method="GET">
+			<table style="width:100%;">
+				<tbody>		
+					<tr>
+						<td>
+							<table style="width:100%;">
+								<tr>
+									<td class="top_border" style="width:90%; padding:8px;">
+										<table style="width:100%;">
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Title" th:text="#{label.flowerName}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<label th:text="${flower.getName()}"></label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Price" th:text="#{label.flowerPrice}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label th:text="${flower.getPrice()}"></label></td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Stock" th:text="#{label.flowerStock}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label th:text="${flower.getStock()}"></label></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<form th:each="order : ${orders}" method="GET">
+			<table style="width:100%;">
+				<tbody>		
+					<tr>
+						<td>
+							<table style="width:100%;">
+								<tr>
+									<td class="top_border" style="width:90%; padding:8px;">
+										<table style="width:100%;">
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Title" th:text="#{label.orderName}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													<label th:text="${order.getShopName()}"></label>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Total" th:text="#{label.orderTotal}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label th:text="${order.getTotal()}"></label></td>
+											</tr>
+											<tr>
+												<td colspan="2" class="subtitle"><label for="Outstanding" th:text="#{label.orderOutstanding}">:</label></td>
+											</tr>
+											<tr>
+												<td colspan="2"><label th:text="${order.getOutstanding()}"></label></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<form method="GET">
+			<table style="width:100%;">
+				<tr>
+								<td colspan="2" class="subtitle">
+									<label th:text="${jsonRaw}"></label>
+								</td>
+							</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

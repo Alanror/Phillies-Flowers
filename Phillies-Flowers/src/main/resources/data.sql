@@ -1,5 +1,7 @@
+INSERT INTO user(ID, UserName, UserPassword) VALUES(0,'admin', 'admin');
 INSERT INTO user(UserName, UserPassword) VALUES('alanror', 'aorpass');
 INSERT INTO user(UserName, UserPassword) VALUES('ciandow', 'cdpass');
+
 
 INSERT INTO package(PackageName, Description, PackageAmount) 
 VALUES 

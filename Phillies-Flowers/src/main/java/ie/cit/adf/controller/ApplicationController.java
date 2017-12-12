@@ -6,12 +6,18 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
+import ie.cit.adf.domain.Flower;
 import ie.cit.adf.domain.Login;
+import ie.cit.adf.domain.Order;
 import ie.cit.adf.domain.Payment;
 import ie.cit.adf.domain.Package;
 import ie.cit.adf.domain.User;
@@ -118,6 +124,77 @@ public class ApplicationController {
 		return "/myOrders";
 	}
 	
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=Home")
+	public String toHome(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		
+		entityManager.clear();
+		return "/home";
+	}
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=Logout")
+	public String logout(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		
+		model.put("login", new Login());
+		return "/login";
+	}
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=Admin Panel")
+	public String toAdminPanel(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		if(loggedInUser.getId() != 0) {
+			model.put("adminMessage", "Sorry You are not an Admin");
+			return "/home";
+		}
+		entityManager.clear();
+		loggedInUser = userRepository.findOne(loggedInUser.getId());
+		return "/admin";
+	}
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=All Flowers")
+	public String showAllFlowers(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		
+		RestTemplate restTemplate = new RestTemplate(); 
+		String url = "http://localhost:8086/rest/flowers/";
+		String result = restTemplate.postForObject(url, null,String.class);
+		System.out.println(result);
+		
+		ResponseEntity<List<Flower>> rateResponse =
+		        restTemplate.exchange(url,
+		                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Flower>>() {
+		            });
+		List<Flower> flowers = rateResponse.getBody();
+		
+		model.put("flowers", flowers);
+		entityManager.clear();
+		loggedInUser = userRepository.findOne(loggedInUser.getId());
+		return "/admin";
+	}
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=My Dutch Orders")
+	public String showMyOrders(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		
+		RestTemplate restTemplate = new RestTemplate(); 
+		String shopName = "Phillies"; //change This To Check another JSON Response (Example: DecosDecos)
+		String url = "http://localhost:8086/rest/orders/" + shopName;
+		String result = restTemplate.postForObject(url, null,String.class);
+		System.out.println(result);
+		
+		ResponseEntity<List<Order>> rateResponse =
+		        restTemplate.exchange(url,
+		                    HttpMethod.GET, null, new ParameterizedTypeReference<List<Order>>() {
+		            });
+		List<Order> orders = rateResponse.getBody();
+		
+		model.put("orders", orders);
+		entityManager.clear();
+		loggedInUser = userRepository.findOne(loggedInUser.getId());
+		return "/admin";
+	}
 	
 	@RequestMapping(value="/myOrders", method=RequestMethod.GET, params="action=Remove Order")
 	public String removePackage(
