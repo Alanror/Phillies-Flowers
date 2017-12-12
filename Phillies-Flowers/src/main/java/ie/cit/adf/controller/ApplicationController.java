@@ -74,7 +74,7 @@ public class ApplicationController {
 		loggedInUser = userRepository.findOne(loggedInUser.getId());
 		
 
-		
+		//This is needed to send to customPage
 		model.put("customPackage", new Package());
 		return "/customOrder";
 	}
