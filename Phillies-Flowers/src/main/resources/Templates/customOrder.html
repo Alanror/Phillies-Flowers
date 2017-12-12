@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="wrapper">
-		<form th:action="@{/customOrder}" th:object="${customPackage}" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/customOrder}" th:object="${customPackage}" method="GET" enctype="multipart/form-data">
 			<table style="width:100%;">
 				<thead>
 					<tr>
@@ -19,17 +19,19 @@
 			<table style="width:100%;">
 				<tr>
 					<td><label class="subtitle" for="Title:" th:text="#{label.packageName}">:</label></td>
-					<td><input type="text" th:field="*{packageName}"/></td>
+					<td><input type="text" th:field="*{packageName}"/>
+					</td>
 					<td th:if="${#fields.hasErrors('packageName')}" th:errors="*{Name}" class="error"> Name Error</td>
 				</tr>
 				<tr>
 					<td class="subtitle"><label for="Description:" th:text="#{label.packageDescription}">:</label></td>
-					<td><textarea rows="4" cols="50" th:field="*{description}"></textarea></td>
+					<td><textarea rows="4" cols="50" th:field="*{description}"></textarea>
+					</td>
 					<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="error"> Description Error</td>
 				</tr>
 				<tr>
-				<tr>
-					<td colspan="2" align="right" style="padding:8px;"><button type="submit" name="action" value="Add "><span th:text="#{label.add}"></span></button></td>
+					
+					<td colspan="2" align="right" style="padding:8px;"><button type="submit" name="action" value="Add"><span th:text="#{label.add}"></span></button></td>
 				</tr>
 			</table>
 		</form>

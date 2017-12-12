@@ -65,6 +65,44 @@ public class ApplicationController {
 		
 		return directory;
 	}
+	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=Custom Order")
+	public String toCustomOrders(
+			@RequestParam(value="action", required=true) String action,
+			Map<String, Object> model) {
+		
+		entityManager.clear();
+		loggedInUser = userRepository.findOne(loggedInUser.getId());
+		
+
+		
+		model.put("customPackage", new Package());
+		return "/customOrder";
+	}
+	@RequestMapping(value="/customOrder", method=RequestMethod.GET, params="action=Add")
+	public String Add(
+			@RequestParam(value="action", required=true) String action,
+			@RequestParam("packageName") String name,
+			@RequestParam("description") String desc,
+			Map<String, Object> model) {
+		
+		entityManager.clear();
+		loggedInUser = userRepository.findOne(loggedInUser.getId());
+		
+		Package package_ = new Package();
+		package_.setDescription(desc);
+		package_.setPackageName(name);
+		package_.setPackageAmount(30);
+		Payment payment = new Payment();
+		
+		payment.setUser(loggedInUser);
+		payment.setPackage(package_);
+		payment.setPaymentAmount(package_.getPackageAmount());
+		packageRepository.save(package_);
+		paymentRepository.save(payment);
+		
+		
+		return "/home";
+	}
 	
 	@RequestMapping(value="/home", method=RequestMethod.GET, params="action=My Orders")
 	public String toMyOrders(
